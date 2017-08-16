@@ -43,26 +43,11 @@ def webhook():
 
 
 def processRequest(req):
-	if req.get("result").get("action") == "LookUpClass":
-		print("Class Lookup Detected")
-		return MITClass.lookupClass(req)
-	if req.get("result").get("action") == "LookUpClass.LookUpClassInformation":
-		print("Class Info Lookup Detected")
-		return MITClass.lookupClass(req)
-	if req.get("result").get("action") == "LookUpPerson":
-		print("People Lookup Detected")
-		return MITPeople.lookupPerson(req)
-	if req.get("result").get("action") == "LookUpPerson.LookUpInformation":
-		print("People Lookup Detected")
-		return MITPeople.lookupInformation(req)
-	if req.get("result").get("action") == "LookUpPerson.LookUpConfirmation":
-		print("People Confirmation Detected")
-		return MITPeople.confirmPerson(req)
+	# if req.get("result").get("action") == "LookUpClass":
+	# 	print("Class Lookup Detected")
+	# 	return MITClass.lookupClass(req)
 	if req.get("result").get("action") == "EndIntent":
 		return endIntent()
-	if req.get("result").get("action") == "LookUpDining":
-		print("Dining Lookup Detected")
-		return MITDining.handle_dining_intent(req)
 	
 	return {
 		"speech": "Unable to proccess the request.  Try again later please.",
