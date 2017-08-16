@@ -43,9 +43,9 @@ def webhook():
 
 
 def processRequest(req):
-	# if req.get("result").get("action") == "LookUpClass":
-	# 	print("Class Lookup Detected")
-	# 	return MITClass.lookupClass(req)
+	if req.get("result").get("action") == "TopNumber":
+		print("Top number detected")
+		return HackerNews.lookupClass(req)
 	if req.get("result").get("action") == "EndIntent":
 		return endIntent()
 	
@@ -64,8 +64,8 @@ def endIntent():
 		 "items":[
 			{
 			   "simpleResponse":{
-				  "textToSpeech":"Thank you for using MIT Information.  Keep us in mind when you need more of your on campus information.",
-				  "displayText":"Thank you for using MIT Information.  Keep us in mind when you need more of your on campus information."
+				  "textToSpeech":"Thank you for using Hacker News.  Hope to see you back soon!",
+				  "displayText":"Thank you for using Hacker News.  Hope to see you back soon!"
 			   }
 			}
 		 ],
@@ -74,8 +74,8 @@ def endIntent():
 	   }
 	}
 	return {
-		"speech": "Thank you for using MIT Information.  Keep us in mind when you need more of your on campus information.",
-		"displayText": "Thank you for using MIT Information.  Keep us in mind when you need more of your on campus information.",
+		"speech": "Thank you for using Hacker News.  Hope to see you back soon!",
+		"displayText": "Thank you for using Hacker News.  Hope to see you back soon!",
 		"data": data,
 		"contextOut": {},
 		"source": "webhook"
