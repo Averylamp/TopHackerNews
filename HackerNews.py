@@ -102,10 +102,19 @@ def addSuggestions(speech = "", suggestions = [], userResponse = True):
                }
             }
          ],
-         "suggestions": suggestionsTitles
+         "suggestions": suggestionsTitles,
+         "listSelect":{
+         	"title":"List Test",
+         	"items":[
+         		{"Title":"Number 1", "Description":"First Element"},
+         		{"Title":"Number 2", "Description":"Second Element"}
+         	]
+         }
       }
    }
 }
+
+
 
 def handleLookupIntent(intent, old_session):
 	output = ""
@@ -131,7 +140,7 @@ def lookupItem(item):
 	headers = {"X-Mashape-Key":"QnME8qXj33mshqT4yltM7QQk1Kfjp1vX7zJjsnoN87jXS0bYCf","Accept":"application/json"}
 	r = requests.get("https://community-hacker-news-v1.p.mashape.com/item/{}.json".format(item), headers=headers)
 	results = r.json()
-	# print(results)
+	print(results)
 	itemTitle = results.get("title", "")
 	return itemTitle
 
