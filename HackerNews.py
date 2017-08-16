@@ -119,7 +119,7 @@ def addSuggestions(speech = "", suggestions = [], userResponse = True):
                   'key one'
                 ]
               },
-              'title': ''
+              'title': 'Item 1'
             },
             {
               'optionInfo': {
@@ -128,7 +128,7 @@ def addSuggestions(speech = "", suggestions = [], userResponse = True):
                   'key two'
                 ]
               },
-              'title': ''
+              'title': 'Item 2'
             }
           ]
         }
