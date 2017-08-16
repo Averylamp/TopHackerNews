@@ -91,44 +91,50 @@ def addSuggestions(speech = "", suggestions = [], userResponse = True):
     for item in suggestions:
         suggestionsTitles.append({"title":item})
     return {
-   "google":{
-      "expect_user_response":userResponse,
-      "rich_response":{
-         "items":[
+  'google': {
+    'expectUserResponse': True,
+    'isSsml': False,
+    'noInputPrompts': [],
+    'richResponse': {
+      'items': [
+        {
+          'simpleResponse': {
+            'textToSpeech': speech,
+            'displayText': speech
+          }
+        }
+      ],
+      'suggestions': suggestions
+    },
+    'systemIntent': {
+      'intent': 'actions.intent.OPTION',
+      'data': {
+        '@type': 'type.googleapis.com/google.actions.v2.OptionValueSpec',
+        'listSelect': {
+          'items': [
             {
-               "simpleResponse":{
-                  "textToSpeech":speech,
-                  "displayText":speech
-               }
-            }
-         ],
-         "suggestions": suggestionsTitles,
-         
-      },
-      "systemIntent":{
-      	 'intent': 'actions.intent.OPTION',
-		  'data': {
-		    '@type': 'type.googleapis.com/google.actions.v2.OptionValueSpec',
-		    "listSelect":{
-         	"title":"List Test",
-         	"items":[
-         		{"Title":"Number 1", "Description":"First Element",'optionInfo': {
+              'optionInfo': {
                 'key': 'key1',
                 'synonyms': [
                   'key one'
                 ]
-              }},
-         		{"Title":"Number 2", "Description":"Second Element",'optionInfo': {
+              },
+              'title': ''
+            },
+            {
+              'optionInfo': {
                 'key': 'key2',
                 'synonyms': [
                   'key two'
                 ]
-              }}
-         	]
-         	}
-         }
+              },
+              'title': ''
+            }
+          ]
+        }
       }
-   }
+    }
+  }
 }
 
 
