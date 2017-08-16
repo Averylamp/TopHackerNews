@@ -112,8 +112,18 @@ def addSuggestions(speech = "", suggestions = [], userResponse = True):
 		    "listSelect":{
          	"title":"List Test",
          	"items":[
-         		{"Title":"Number 1", "Description":"First Element"},
-         		{"Title":"Number 2", "Description":"Second Element"}
+         		{"Title":"Number 1", "Description":"First Element",'optionInfo': {
+                'key': 'key1',
+                'synonyms': [
+                  'key one'
+                ]
+              }},
+         		{"Title":"Number 2", "Description":"Second Element",'optionInfo': {
+                'key': 'key2',
+                'synonyms': [
+                  'key two'
+                ]
+              }}
          	]
          	}
          }
