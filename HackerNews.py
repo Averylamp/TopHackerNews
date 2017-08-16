@@ -64,7 +64,7 @@ def handle_session_end_request():
 
 
 def googleLookupIntent(req):
-	print("Reached intent")
+    print("Reached intent")
     speech =  "Lookup Top Hackernews"
     contexts = req.get("result").get("contexts")
     parameters = req.get("result").get("parameters")
