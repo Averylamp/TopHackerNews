@@ -104,7 +104,7 @@ def addSuggestions(speech = "", suggestions = [], userResponse = True):
           }
         }
       ],
-      'suggestions': suggestions
+      'suggestions': suggestionsTitles
     },
     'systemIntent': {
       'intent': 'actions.intent.OPTION',
