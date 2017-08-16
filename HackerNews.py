@@ -72,7 +72,7 @@ def googleLookupIntent(req):
 
     topNumber = parameters.get("top_number", 5)
     speech = lookupItems(topNumber)
-
+    suggestions += ["Suggestion 1", "Suggestion 2","Suggestion 3"]
 
     print("----------- Final response -------------")
     print(speech)
