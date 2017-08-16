@@ -63,6 +63,49 @@ def handle_session_end_request():
 # --------------- Intents ------------------
 
 
+def googleLookupIntent(req):
+	print("Reached intent")
+    speech =  "Lookup Top Hackernews"
+    contexts = req.get("result").get("contexts")
+    parameters = req.get("result").get("parameters")
+    suggestions = []
+
+    topNumber = parameters.get("top_number", 5)
+    speech = lookupItems(topNumber)
+
+
+    print("----------- Final response -------------")
+    print(speech)
+    data = addSuggestions(speech, suggestions)
+    return {
+    "speech": speech,
+    "displayText": speech,
+    "data": data,
+    "contextOut": contexts,
+    "source": "webhook"
+    }
+
+
+def addSuggestions(speech = "", suggestions = [], userResponse = True):
+    suggestionsTitles = []
+    for item in suggestions:
+        suggestionsTitles.append({"title":item})
+    return {
+   "google":{
+      "expect_user_response":userResponse,
+      "rich_response":{
+         "items":[
+            {
+               "simpleResponse":{
+                  "textToSpeech":speech,
+                  "displayText":speech
+               }
+            }
+         ],
+         "suggestions": suggestionsTitles
+      }
+   }
+}
 
 def handleLookupIntent(intent, old_session):
 	output = ""
@@ -88,7 +131,7 @@ def lookupItem(item):
 	headers = {"X-Mashape-Key":"QnME8qXj33mshqT4yltM7QQk1Kfjp1vX7zJjsnoN87jXS0bYCf","Accept":"application/json"}
 	r = requests.get("https://community-hacker-news-v1.p.mashape.com/item/{}.json".format(item), headers=headers)
 	results = r.json()
-	print(results)
+	# print(results)
 	itemTitle = results.get("title", "")
 	return itemTitle
 
@@ -123,7 +166,6 @@ def lookupItems(number):
 		print("Found Item {} / {}, - {}".format(count + 1, number, item))
 	return "Here is the top {} items.  {}".format(number, getListString(resultArr))
 
-print(lookupItems(4))
 # --------------- Events ------------------
 
 def on_session_started(session_started_request, session):
@@ -204,4 +246,45 @@ def lambda_handler(event, context):
 	elif event['request']['type'] == "SessionEndedRequest":
 		return on_session_ended(event['request'], event['session'])
 
+
+test = {
+  "id": "c51694d3-1244-4d56-932b-1d8947ec65f4",
+  "timestamp": "2017-08-16T09:41:25.838Z",
+  "lang": "en",
+  "result": {
+    "source": "agent",
+    "resolvedQuery": "give me the top 5",
+    "action": "TopNumber",
+    "actionIncomplete": False,
+    "parameters": {
+      "top_number": "5"
+    },
+    "contexts": [],
+    "metadata": {
+      "intentId": "9ebff9ef-5b6d-4e1c-924d-5697481fa443",
+      "webhookUsed": "true",
+      "webhookForSlotFillingUsed": "false",
+      "webhookResponseTime": 164,
+      "intentName": "Top Intent"
+    },
+    "fulfillment": {
+      "speech": "Unable to proccess the request.  Try again later please.",
+      "source": "webhook",
+      "displayText": "Unable to proccess the request.  Try again later please.",
+      "messages": [
+        {
+          "type": 0,
+          "speech": "Unable to proccess the request.  Try again later please."
+        }
+      ]
+    },
+    "score": 1
+  },
+  "status": {
+    "code": 200,
+    "errorType": "success"
+  },
+  "sessionId": "c849e9e7-3c08-45c4-9df6-4a438214aeb9"
+}
+googleLookupIntent(test)
 
