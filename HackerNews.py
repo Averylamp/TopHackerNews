@@ -47,17 +47,16 @@ def addSuggestions(speech = "", suggestions = [], userResponse = True, items = [
         }
       ],
       'suggestions': suggestionsTitles
+    },
+    'systemIntent': {
+      'intent': 'actions.intent.OPTION',
+      'data': {
+        '@type': 'type.googleapis.com/google.actions.v2.OptionValueSpec',
+        'listSelect': {
+          'items': itemList
+        }
+      }
     }
-    # ,
-    # 'systemIntent': {
-    #   'intent': 'actions.intent.OPTION',
-    #   'data': {
-    #     '@type': 'type.googleapis.com/google.actions.v2.OptionValueSpec',
-    #     'listSelect': {
-    #       'items': itemList
-    #     }
-    #   }
-    # }
   }
 }
 
