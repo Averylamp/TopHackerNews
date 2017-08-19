@@ -49,6 +49,9 @@ def processRequest(req):
 	if req.get("result").get("action") == "NewsArticle":
 		print("News Article detected")
 		return HackerNews.googleLookupNewsIntent(req)
+	if req.get("result").get("action") == "input.welcome":
+		print("Welcome Intent")
+		return welcomeIntent()
 	if req.get("result").get("action") == "EndIntent":
 		return endIntent()
 	
@@ -60,9 +63,37 @@ def processRequest(req):
 		"source": "webhook"
 	}
 
-def endIntent():
+def welcomeIntent():
+	suggestions = ["Top 3", "Top 5","Top 10", "Top 15", "Top 20"]
+	suggestionsTitles = []
+    for item in suggestions:
+        suggestionsTitles.append({"title":item})
 	data =  {"google":{
 	  "expect_user_response":False,
+	  "rich_response":{
+		 "items":[
+			{
+			   "simpleResponse":{
+				  "textToSpeech":"I'm Top of Hacker News. Just say how many articles you want and I will list them to you. After getting a list of article, you can click on an article to read it. At any point you can say cancel to close the assistant.",
+				  "displayText":"I'm Top of Hacker News. Just say how many articles you want and I will list them to you. After getting a list of article, you can click on an article to read it. At any point you can say cancel to close the assistant."
+			   }
+			}
+		 ],
+		 "suggestions": suggestionsTitles
+		  }
+	   }
+	}
+	return {
+		"speech": "Thank you for using Hacker News.  Hope to see you back soon!",
+		"displayText": "Thank you for using Hacker News.  Hope to see you back soon!",
+		"data": data,
+		"contextOut": {},
+		"source": "webhook"
+	}
+
+def endIntent():
+	data =  {"google":{
+	  "expect_user_response":True,
 	  "rich_response":{
 		 "items":[
 			{
