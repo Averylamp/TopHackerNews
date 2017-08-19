@@ -198,7 +198,7 @@ def googleLookupIntent(req):
     suggestions = []
 
     topNumber = parameters.get("top_number", 5)
-    if topNumber > 20:
+    if int(topNumber) > 20:
         topNumber = 20
     listItems = []
     speech = lookupItems(topNumber, contexts, listItems)
