@@ -201,8 +201,8 @@ def googleLookupIntent(req):
         topNumber = 20
     listItems = []
     speech = lookupItems(topNumber, contexts, listItems)
-    # suggestions += ["Suggestion 1", "Suggestion 2","Suggestion 3"]
-
+    suggestions += ["Top 3", "Top 5","Top 10", "Top 15", "Top 20"]
+    speech += " To read an option, click on it. To look up more options by saying 'Top 5'. To end, say cancel."
     print("----------- Final response -------------")
     print(filterAsciiText(speech))
     data = addSuggestions(speech, suggestions, True, listItems)
