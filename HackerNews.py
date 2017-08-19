@@ -133,7 +133,7 @@ def lookupItems(number, contexts = [], listItems = []):
         contextArr.append({'title': filterAsciiText(item['title']), 'id':item['id'], 'url':item['url']})
         # print(filterAsciiText("Found Item {} / {}, - {}".format(count + 1, number, item)))
     print(contextArr)
-    updateContext(contexts, "itemscontext", 5, contextArr)
+    updateContext(contexts, "itemscontext", 5, {'values':contextArr})
     for i in resultArr:
         listItems.append([filterAsciiText(i["title"]), i["id"]])
     def a(b):
@@ -148,8 +148,8 @@ lookupItems(3)
 
 
 test = {
-  "id": "7035052a-1080-4ff3-9ea2-c4818ffde291",
-  "timestamp": "2017-08-19T03:32:55.691Z",
+  "id": "dcaa7b6e-2fe8-47ed-baa5-5fad6cedc2af",
+  "timestamp": "2017-08-19T06:06:24.822Z",
   "lang": "en",
   "result": {
     "source": "agent",
@@ -164,7 +164,7 @@ test = {
       "intentId": "9ebff9ef-5b6d-4e1c-924d-5697481fa443",
       "webhookUsed": "true",
       "webhookForSlotFillingUsed": "false",
-      "webhookResponseTime": 779,
+      "webhookResponseTime": 1148,
       "intentName": "Top Intent"
     },
     "fulfillment": {
@@ -185,5 +185,5 @@ test = {
   },
   "sessionId": "c849e9e7-3c08-45c4-9df6-4a438214aeb9"
 }
-# googleLookupIntent(test)
+googleLookupIntent(test)
 

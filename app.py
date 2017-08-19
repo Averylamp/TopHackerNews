@@ -84,14 +84,14 @@ def endIntent():
 	}
 		
 test = {
-  "id": "a385f0a7-513d-45f2-b2a7-60a971c45c9a",
-  "timestamp": "2017-08-19T04:45:02.691Z",
+  "id": "dcaa7b6e-2fe8-47ed-baa5-5fad6cedc2af",
+  "timestamp": "2017-08-19T06:06:24.822Z",
   "lang": "en",
   "result": {
     "source": "agent",
-    "resolvedQuery": "3",
+    "resolvedQuery": "top 3",
     "action": "TopNumber",
-    "actionIncomplete":False,
+    "actionIncomplete": False,
     "parameters": {
       "top_number": "3"
     },
@@ -100,6 +100,7 @@ test = {
       "intentId": "9ebff9ef-5b6d-4e1c-924d-5697481fa443",
       "webhookUsed": "true",
       "webhookForSlotFillingUsed": "false",
+      "webhookResponseTime": 1148,
       "intentName": "Top Intent"
     },
     "fulfillment": {
@@ -111,19 +112,19 @@ test = {
         }
       ]
     },
-    "score": 0.3700000047683716
+    "score": 1
   },
   "status": {
     "code": 206,
     "errorType": "partial_content",
-    "errorDetails": "Webhook call failed. Error message:  ErrorId: e6423765-a6e0-41f2-8b45-33e2f0f7976e"
+    "errorDetails": "Webhook call failed. Error: Webhook response was empty."
   },
   "sessionId": "c849e9e7-3c08-45c4-9df6-4a438214aeb9"
 }
-# print(processRequest(test))
-if __name__ == '__main__':
-	port = int(os.getenv('PORT', 5000))
+print(processRequest(test))
+# if __name__ == '__main__':
+# 	port = int(os.getenv('PORT', 5000))
 
-	print("Starting app on port %d" % port)
+# 	print("Starting app on port %d" % port)
 
-	app.run(debug=False, port=port, host='0.0.0.0')
+# 	app.run(debug=False, port=port, host='0.0.0.0')
