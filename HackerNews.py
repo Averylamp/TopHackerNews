@@ -74,6 +74,12 @@ def addSuggestionsCard(speech = "", suggestions = [], userResponse = True, title
     'richResponse': {
       'items': [
         {
+          'simpleResponse': {
+            'textToSpeech': speech,
+            'displayText': speech
+          }
+        },
+        {
             "basicCard": {
                 "title": title,
                 "formattedText": "**" + title + "**\n" + "By: " + author,
@@ -90,12 +96,6 @@ def addSuggestionsCard(speech = "", suggestions = [], userResponse = True, title
                     }
                 ]
             }
-        },
-        {
-          'simpleResponse': {
-            'textToSpeech': speech,
-            'displayText': speech
-          }
         }
       ],
       'suggestions': suggestionsTitles
