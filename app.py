@@ -120,10 +120,10 @@ test = {
   },
   "sessionId": "c849e9e7-3c08-45c4-9df6-4a438214aeb9"
 }
-print(processRequest(test))
-# if __name__ == '__main__':
-# 	port = int(os.getenv('PORT', 5000))
+# print(processRequest(test))
+if __name__ == '__main__':
+	port = int(os.getenv('PORT', 5000))
 
-# 	print("Starting app on port %d" % port)
+	print("Starting app on port %d" % port)
 
-# 	app.run(debug=False, port=port, host='0.0.0.0')
+	app.run(debug=False, port=port, host='0.0.0.0')
