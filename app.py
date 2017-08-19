@@ -34,7 +34,7 @@ def webhook():
 
 	res = processRequest(req)
 	print("Response: ")
-	print(res["speech"])
+	print(res)
 	res = json.dumps(res, indent=4)
 	
 	r = make_response(res)
