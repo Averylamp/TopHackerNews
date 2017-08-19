@@ -125,12 +125,15 @@ def lookupItems(number, contexts = [], listItems = []):
     result = r.json()
 
     resultArr = []
+    contextArr = []
     for count in range(int(number)):
         item = lookupItem(result[count])
         # print(item)
         resultArr.append(item)
-        print(filterAsciiText("Found Item {} / {}, - {}".format(count + 1, number, item)))
-    # updateContext(contexts, "itemsContext", 5, resultArr)
+        contextArr.append({'title': filterAsciiText(item['title']), 'id':item['id'], 'url':item['url']})
+        # print(filterAsciiText("Found Item {} / {}, - {}".format(count + 1, number, item)))
+    print(contextArr)
+    updateContext(contexts, "itemsContext", 5, contextArr)
     for i in resultArr:
         listItems.append([filterAsciiText(i["title"]), i["id"]])
     def a(b):
@@ -140,7 +143,7 @@ def lookupItems(number, contexts = [], listItems = []):
     print(speechResult)
     return speechResult
 
-# lookupItems(3)
+lookupItems(3)
 # --------------- Events ------------------
 
 
