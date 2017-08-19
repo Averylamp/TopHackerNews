@@ -130,7 +130,7 @@ def lookupItems(number, contexts = [], listItems = []):
         # print(item)
         resultArr.append(item)
         print(filterAsciiText("Found Item {} / {}, - {}".format(count + 1, number, item)))
-    updateContext(contexts, "itemsContext", 5, resultArr)
+    # updateContext(contexts, "itemsContext", 5, resultArr)
     for i in resultArr:
         listItems.append([filterAsciiText(i["title"]), i["id"]])
     def a(b):
