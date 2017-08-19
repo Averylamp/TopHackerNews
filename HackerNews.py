@@ -170,7 +170,7 @@ def googleLookupIntent(req):
     return {
     "speech": speech,
     "displayText": speech,
-    "data": data,
+    # "data": data,
     "contextOut": contexts,
     "source": "webhook"
     }
@@ -279,23 +279,23 @@ def lambda_handler(event, context):
 
 
 test = {
-  "id": "c899d56b-9cb4-462b-a647-693820e4df26",
-  "timestamp": "2017-08-19T03:23:28.828Z",
+  "id": "7035052a-1080-4ff3-9ea2-c4818ffde291",
+  "timestamp": "2017-08-19T03:32:55.691Z",
   "lang": "en",
   "result": {
     "source": "agent",
-    "resolvedQuery": "top 1",
+    "resolvedQuery": "top 3",
     "action": "TopNumber",
     "actionIncomplete": False,
     "parameters": {
-      "top_number": "1"
+      "top_number": "3"
     },
     "contexts": [],
     "metadata": {
       "intentId": "9ebff9ef-5b6d-4e1c-924d-5697481fa443",
       "webhookUsed": "true",
       "webhookForSlotFillingUsed": "false",
-      "webhookResponseTime": 338,
+      "webhookResponseTime": 779,
       "intentName": "Top Intent"
     },
     "fulfillment": {
