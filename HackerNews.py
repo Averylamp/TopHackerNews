@@ -49,7 +49,7 @@ def addSuggestions(speech = "", suggestions = [], userResponse = True, items = [
       'suggestions': suggestionsTitles
     },
     'systemIntent': {
-      'intent': 'actions.intent.OPTION',
+      'intent': 'actions.intent.NewsArticle',
       'data': {
         '@type': 'type.googleapis.com/google.actions.v2.OptionValueSpec',
         'listSelect': {
