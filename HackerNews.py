@@ -63,29 +63,7 @@ def handle_session_end_request():
 # --------------- Intents ------------------
 
 
-def googleLookupIntent(req):
-    print("Reached intent")
-    speech =  "Lookup Top Hackernews"
-    contexts = req.get("result").get("contexts")
-    parameters = req.get("result").get("parameters")
-    suggestions = []
 
-    topNumber = parameters.get("top_number", 5)
-    listItems = []
-    speech = lookupItems(topNumber, contexts, listItems)
-    # suggestions += ["Suggestion 1", "Suggestion 2","Suggestion 3"]
-
-    print("----------- Final response -------------")
-    # print(speech)
-    data = addSuggestions(speech, suggestions, True, listItems)
-    # print(data)
-    return {
-    "speech": speech,
-    "displayText": speech,
-    "data": data,
-    "contextOut": contexts,
-    "source": "webhook"
-    }
 
 def updateContext(contexts, name, lifespan, parameters):
     updated = False
@@ -139,35 +117,11 @@ def addSuggestions(speech = "", suggestions = [], userResponse = True, items = [
   }
 }
 
-# print(addSuggestions("", [], True, [["Hi", "1451245"],["Bye", "1451247"]]))
-
-
-
-def handleLookupIntent(intent, old_session):
-    output = ""
-    should_end_session = True
-    session = {}
-    if 'TopNumber' in intent['slots']:
-        print(intent['slots']['TopNumber'])
-        phrase = intent['slots']['TopNumber']
-        fullNumber = 5
-        if 'value' in phrase and phrase.get("value","") != "" and phrase.get("value","")  is not None :
-            fullNumber = int(phrase['value'])
-            print("Full Phrase - {}".format(fullNumber))
-        
-        if fullNumber > 30:
-            fullNumber = 30
-        
-        lookup_results = lookupItems(fullNumber)
-        output = lookup_results
-    return build_response(session, build_speechlet_response("Hacker News Top {}".format(fullNumber), output, output, should_end_session))
-
-
 def lookupItem(item):
     headers = {"X-Mashape-Key":"QnME8qXj33mshqT4yltM7QQk1Kfjp1vX7zJjsnoN87jXS0bYCf","Accept":"application/json"}
     r = requests.get("https://community-hacker-news-v1.p.mashape.com/item/{}.json".format(item), headers=headers)
     results = r.json()
-    # print(results)
+    results["title"] = filterAsciiText(results["title"])
     return results
     # itemTitle = results.get("title", "")
     # return itemTitle
@@ -180,7 +134,10 @@ def getListString(listName, function = None, conjunction = "and"):
     if len(listName) == 0:
         return ""
     if len(listName) == 1:
-        return "{}.".format(listName[0])
+        if function is not None:
+            return "{}.".format(function(listName[0]))
+        else:
+            return "{}.".format(listName[0])
     for i in range(len(listName)):
         if i == len(listName) - 1:
             if function is not None:
@@ -193,6 +150,30 @@ def getListString(listName, function = None, conjunction = "and"):
             else:
                 output += "{}, ".format(listName[i])
     return output
+
+def googleLookupIntent(req):
+    print("Reached intent")
+    speech =  "Lookup Top Hackernews"
+    contexts = req.get("result").get("contexts")
+    parameters = req.get("result").get("parameters")
+    suggestions = []
+
+    topNumber = parameters.get("top_number", 5)
+    listItems = []
+    speech = lookupItems(topNumber, contexts, listItems)
+    # suggestions += ["Suggestion 1", "Suggestion 2","Suggestion 3"]
+
+    print("----------- Final response -------------")
+    print(filterAsciiText(speech))
+    data = addSuggestions(speech, suggestions, True, listItems)
+    # print(data)
+    return {
+    "speech": speech,
+    "displayText": speech,
+    "data": data,
+    "contextOut": contexts,
+    "source": "webhook"
+    }
 
 def lookupItems(number, contexts = [], listItems = []):
     headers = {"X-Mashape-Key":"QnME8qXj33mshqT4yltM7QQk1Kfjp1vX7zJjsnoN87jXS0bYCf","Accept":"application/json"}
@@ -210,7 +191,10 @@ def lookupItems(number, contexts = [], listItems = []):
         listItems.append([filterAsciiText(i["title"]), i["id"]])
     def a(b):
         return filterAsciiText(b.get("title", ""))
-    return "Here is the top {} items.  {}".format(number, getListString(resultArr, a))
+
+    speechResult = "Here is the top {} items.  {}".format(number, getListString(resultArr, a))
+    print(speechResult)
+    return speechResult
 
 # lookupItems(3)
 # --------------- Events ------------------
