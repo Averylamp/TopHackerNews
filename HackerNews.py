@@ -84,8 +84,8 @@ def addSuggestionsCard(speech = "", suggestions = [], userResponse = True, title
                 "title": title,
                 "formattedText": "**" + title + "**\n" + "By: " + author,
                 "image": {
-                    "url": "https://www.google.com/search?q=42",
-                    "accessibilityText": "Image alternate text"
+                    "url": "https://api.letsvalidate.com/v1/thumbs?url=" + url,
+                    "accessibilityText": "Website thumbnail"
                 },
                 "buttons": [
                     {
