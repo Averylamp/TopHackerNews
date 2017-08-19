@@ -74,12 +74,6 @@ def addSuggestionsCard(speech = "", suggestions = [], userResponse = True, title
     'richResponse': {
       'items': [
         {
-          'simpleResponse': {
-            'textToSpeech': speech,
-            'displayText': speech
-          }
-        },
-        {
             "basicCard": {
                 "title": title,
                 "formattedText": "**" + title + "**\n" + "By: " + author,
@@ -96,6 +90,12 @@ def addSuggestionsCard(speech = "", suggestions = [], userResponse = True, title
                     }
                 ]
             }
+        },
+        {
+          'simpleResponse': {
+            'textToSpeech': speech,
+            'displayText': speech
+          }
         }
       ],
       'suggestions': suggestionsTitles
@@ -169,7 +169,7 @@ def googleLookupNewsIntent(req):
         "source": "webhook"
         }
     newsData = lookupItem(newsNumber)
-    speech = "Looking up News article {}".format(newsData["title"])
+    speech = "Here is the news article {}.  To look up more Top Hacker News ask for a number of top articles again or say cancel.".format(newsData["title"])
 
     # topNumber = parameters.get("top_number", 5)
     # listItems = []
@@ -198,6 +198,8 @@ def googleLookupIntent(req):
     suggestions = []
 
     topNumber = parameters.get("top_number", 5)
+    if topNumber > 20:
+        topNumber = 20
     listItems = []
     speech = lookupItems(topNumber, contexts, listItems)
     # suggestions += ["Suggestion 1", "Suggestion 2","Suggestion 3"]
