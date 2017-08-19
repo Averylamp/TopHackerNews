@@ -45,7 +45,9 @@ def webhook():
 def processRequest(req):
 	if req.get("result").get("action") == "TopNumber":
 		print("Top number detected")
-		return HackerNews.googleLookupIntent(req)
+		a = HackerNews.googleLookupIntent(req)
+		print( " ---------------------------")
+		return a
 	if req.get("result").get("action") == "EndIntent":
 		return endIntent()
 	
@@ -81,11 +83,48 @@ def endIntent():
 		"source": "webhook"
 	}
 		
+test = {
+  "id": "d9564b92-c80f-4667-8330-528d25ae259e",
+  "timestamp": "2017-08-19T03:37:55.347Z",
+  "lang": "en",
+  "result": {
+    "source": "agent",
+    "resolvedQuery": "4",
+    "action": "TopNumber",
+    "actionIncomplete": False,
+    "parameters": {
+      "top_number": "4"
+    },
+    "contexts": [],
+    "metadata": {
+      "intentId": "9ebff9ef-5b6d-4e1c-924d-5697481fa443",
+      "webhookUsed": "true",
+      "webhookForSlotFillingUsed": "false",
+      "webhookResponseTime": 765,
+      "intentName": "Top Intent"
+    },
+    "fulfillment": {
+      "speech": "",
+      "messages": [
+        {
+          "type": 0,
+          "speech": ""
+        }
+      ]
+    },
+    "score": 0.3700000047683716
+  },
+  "status": {
+    "code": 206,
+    "errorType": "partial_content",
+    "errorDetails": "Webhook call failed. Error: Webhook response was empty."
+  },
+  "sessionId": "c849e9e7-3c08-45c4-9df6-4a438214aeb9"
+}
+print(processRequest(test))
+# if __name__ == '__main__':
+# 	port = int(os.getenv('PORT', 5000))
 
+# 	print("Starting app on port %d" % port)
 
-if __name__ == '__main__':
-	port = int(os.getenv('PORT', 5000))
-
-	print("Starting app on port %d" % port)
-
-	app.run(debug=False, port=port, host='0.0.0.0')
+# 	app.run(debug=False, port=port, host='0.0.0.0')
