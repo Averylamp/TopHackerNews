@@ -65,7 +65,6 @@ def addSuggestionsCard(speech = "", suggestions = [], userResponse = True, title
     suggestionsTitles = []
     for item in suggestions:
         suggestionsTitles.append({"title":item})
-          
     return {
   'google': {
     'expectUserResponse': True,
@@ -174,7 +173,7 @@ def googleLookupNewsIntent(req):
     # topNumber = parameters.get("top_number", 5)
     # listItems = []
     # speech = lookupItems(topNumber, contexts, listItems)
-    # # suggestions += ["Suggestion 1", "Suggestion 2","Suggestion 3"]
+    suggestions += ["Top 3", "Top 5","Top 10", "Top 15", "Top 20"]
 
     print("----------- Final response -------------")
     print(filterAsciiText(speech))
