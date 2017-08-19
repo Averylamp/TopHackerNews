@@ -170,7 +170,7 @@ def googleLookupIntent(req):
     return {
     "speech": speech,
     "displayText": speech,
-    # "data": data,
+    "data": data,
     "contextOut": contexts,
     "source": "webhook"
     }
