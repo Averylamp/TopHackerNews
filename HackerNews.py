@@ -27,7 +27,7 @@ def addSuggestions(speech = "", suggestions = [], userResponse = True, items = [
         a = {}
         a["title"] = item[0]
         a["optionInfo"] = {
-                'key': item[1],
+                'key': str(item[1]),
                 'synonyms': [item[0]]
               }
         itemList.append(a)
