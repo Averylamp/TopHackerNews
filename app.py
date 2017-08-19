@@ -66,8 +66,8 @@ def processRequest(req):
 def welcomeIntent():
 	suggestions = ["Top 3", "Top 5","Top 10", "Top 15", "Top 20"]
 	suggestionsTitles = []
-    for item in suggestions:
-        suggestionsTitles.append({"title":item})
+	for item in suggestions:
+		suggestionsTitles.append({"title":item})
 	data =  {"google":{
 	  "expect_user_response":False,
 	  "rich_response":{
@@ -120,36 +120,36 @@ test = {
   "timestamp": "2017-08-19T06:06:24.822Z",
   "lang": "en",
   "result": {
-    "source": "agent",
-    "resolvedQuery": "top 3",
-    "action": "TopNumber",
-    "actionIncomplete": False,
-    "parameters": {
-      "top_number": "3"
-    },
-    "contexts": [],
-    "metadata": {
-      "intentId": "9ebff9ef-5b6d-4e1c-924d-5697481fa443",
-      "webhookUsed": "true",
-      "webhookForSlotFillingUsed": "false",
-      "webhookResponseTime": 1148,
-      "intentName": "Top Intent"
-    },
-    "fulfillment": {
-      "speech": "",
-      "messages": [
-        {
-          "type": 0,
-          "speech": ""
-        }
-      ]
-    },
-    "score": 1
+	"source": "agent",
+	"resolvedQuery": "top 3",
+	"action": "TopNumber",
+	"actionIncomplete": False,
+	"parameters": {
+	  "top_number": "3"
+	},
+	"contexts": [],
+	"metadata": {
+	  "intentId": "9ebff9ef-5b6d-4e1c-924d-5697481fa443",
+	  "webhookUsed": "true",
+	  "webhookForSlotFillingUsed": "false",
+	  "webhookResponseTime": 1148,
+	  "intentName": "Top Intent"
+	},
+	"fulfillment": {
+	  "speech": "",
+	  "messages": [
+		{
+		  "type": 0,
+		  "speech": ""
+		}
+	  ]
+	},
+	"score": 1
   },
   "status": {
-    "code": 206,
-    "errorType": "partial_content",
-    "errorDetails": "Webhook call failed. Error: Webhook response was empty."
+	"code": 206,
+	"errorType": "partial_content",
+	"errorDetails": "Webhook call failed. Error: Webhook response was empty."
   },
   "sessionId": "c849e9e7-3c08-45c4-9df6-4a438214aeb9"
 }
