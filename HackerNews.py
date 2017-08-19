@@ -76,8 +76,9 @@ def googleLookupIntent(req):
     # suggestions += ["Suggestion 1", "Suggestion 2","Suggestion 3"]
 
     print("----------- Final response -------------")
-    print(speech)
-    data = addSuggestions(speech, suggestions, True,listItems)
+    # print(speech)
+    data = addSuggestions(speech, suggestions, True, listItems)
+    # print(data)
     return {
     "speech": speech,
     "displayText": speech,
@@ -294,97 +295,40 @@ def lambda_handler(event, context):
 
 
 test = {
-  "id": "c8a2bd82-53e8-41a4-8356-1824bd43ba26",
-  "timestamp": "2017-08-19T03:16:20.08Z",
+  "id": "c899d56b-9cb4-462b-a647-693820e4df26",
+  "timestamp": "2017-08-19T03:23:28.828Z",
   "lang": "en",
   "result": {
     "source": "agent",
-    "resolvedQuery": "top 3",
+    "resolvedQuery": "top 1",
     "action": "TopNumber",
     "actionIncomplete": False,
     "parameters": {
-      "top_number": "3"
+      "top_number": "1"
     },
     "contexts": [],
     "metadata": {
       "intentId": "9ebff9ef-5b6d-4e1c-924d-5697481fa443",
       "webhookUsed": "true",
       "webhookForSlotFillingUsed": "false",
-      "webhookResponseTime": 995,
+      "webhookResponseTime": 338,
       "intentName": "Top Intent"
     },
     "fulfillment": {
-      "speech": "Here is the top 3 items.  Firefox Focus   A new private browser for iOS and Android, Facebook says no to license change request from Apache Software Foundation,  and What Should Happen to People s Online Identity When They Die?.",
-      "source": "webhook",
-      "displayText": "Here is the top 3 items.  Firefox Focus   A new private browser for iOS and Android, Facebook says no to license change request from Apache Software Foundation,  and What Should Happen to People s Online Identity When They Die?.",
+      "speech": "",
       "messages": [
         {
           "type": 0,
-          "speech": "Here is the top 3 items.  Firefox Focus   A new private browser for iOS and Android, Facebook says no to license change request from Apache Software Foundation,  and What Should Happen to People s Online Identity When They Die?."
+          "speech": ""
         }
-      ],
-      "data": {
-        "google": {
-          "expectUserResponse": True,
-          "isSsml": False,
-          "noInputPrompts": [],
-          "richResponse": {
-            "items": [
-              {
-                "simpleResponse": {
-                  "textToSpeech": "Here is the top 3 items.  Firefox Focus   A new private browser for iOS and Android, Facebook says no to license change request from Apache Software Foundation,  and What Should Happen to People s Online Identity When They Die?.",
-                  "displayText": "Here is the top 3 items.  Firefox Focus   A new private browser for iOS and Android, Facebook says no to license change request from Apache Software Foundation,  and What Should Happen to People s Online Identity When They Die?."
-                }
-              }
-            ],
-            "suggestions": [
-              {
-                "title": "Suggestion 1"
-              },
-              {
-                "title": "Suggestion 2"
-              },
-              {
-                "title": "Suggestion 3"
-              }
-            ]
-          },
-          "systemIntent": {
-            "intent": "actions.intent.OPTION",
-            "data": {
-              "@type": "type.googleapis.com/google.actions.v2.OptionValueSpec",
-              "listSelect": {
-                "items": [
-                  {
-                    "optionInfo": {
-                      "key": "key1",
-                      "synonyms": [
-                        "key one"
-                      ]
-                    },
-                    "title": "Item 1"
-                  },
-                  {
-                    "optionInfo": {
-                      "key": "key2",
-                      "synonyms": [
-                        "key two"
-                      ]
-                    },
-                    "title": "Item 2"
-                  }
-                ]
-              }
-            }
-          }
-        }
-      }
+      ]
     },
     "score": 1
   },
   "status": {
-    "code": 200,
-    "errorType": "success"
+    "code": 206,
+    "errorType": "partial_content",
+    "errorDetails": "Webhook call failed. Error: Webhook response was empty."
   },
   "sessionId": "c849e9e7-3c08-45c4-9df6-4a438214aeb9"
 }
