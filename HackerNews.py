@@ -102,15 +102,41 @@ def googleLookupNewsIntent(req):
     contexts = req.get("result").get("contexts")
     parameters = req.get("result").get("parameters")
     suggestions = []
+    for context in contexts:
+        if context.get("name", "") == "itemscontext":
+            itemsContext = context
+        if context.get("name", "") == "actions_intent_option":
+            actionIntent = context
+    if actionIntent == None or itemsContext == None:
+        speech = "Unable to look up that article, please try again later."
+        return {
+        "speech": speech,
+        "displayText": speech,
+        "data": None,
+        "contextOut": contexts,
+        "source": "webhook"
+        }
+    newsNumber = actionIntent.get("parameters", {}).get("OPTION", None)
+    if newsNumber == None:
+        speech = "Unable to look up that article, please try again later."
+        return {
+        "speech": speech,
+        "displayText": speech,
+        "data": None,
+        "contextOut": contexts,
+        "source": "webhook"
+        }
+    newsData = lookupItem(newsNumber)
+    speech = "Looking up News article {}".format(newsData["title"])
 
     # topNumber = parameters.get("top_number", 5)
     # listItems = []
     # speech = lookupItems(topNumber, contexts, listItems)
     # # suggestions += ["Suggestion 1", "Suggestion 2","Suggestion 3"]
 
-    # print("----------- Final response -------------")
-    # print(filterAsciiText(speech))
-    data = addSuggestions(speech, suggestions, True, listItems)
+    print("----------- Final response -------------")
+    print(filterAsciiText(speech))
+    data = addSuggestions(speech, suggestions, True)
     # print(data)
     return {
     "speech": speech,
@@ -119,6 +145,8 @@ def googleLookupNewsIntent(req):
     "contextOut": contexts,
     "source": "webhook"
     }
+
+print(lookupItem("15049171"))
 
 def googleLookupIntent(req):
     print("Reached intent")
@@ -168,7 +196,7 @@ def lookupItems(number, contexts = [], listItems = []):
     print(speechResult)
     return speechResult
 
-lookupItems(3)
+# lookupItems(3)
 # --------------- Events ------------------
 
 
@@ -210,5 +238,5 @@ test = {
   },
   "sessionId": "c849e9e7-3c08-45c4-9df6-4a438214aeb9"
 }
-googleLookupIntent(test)
+# googleLookupIntent(test)
 
