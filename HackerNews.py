@@ -53,7 +53,7 @@ def addSuggestions(speech = "", suggestions = [], userResponse = True, items = [
       'data': {
         '@type': 'type.googleapis.com/google.actions.v2.OptionValueSpec',
         'listSelect': {
-          'title':'Top Hacker News'
+          'title':'Top Hacker News',
           'items': itemList
         }
       }
