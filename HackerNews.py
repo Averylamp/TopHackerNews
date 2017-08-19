@@ -95,6 +95,31 @@ def getListString(listName, function = None, conjunction = "and"):
                 output += "{}, ".format(listName[i])
     return output
 
+def googleLookupNewsIntent(req):
+    print("Reached News intent")
+    print(req)
+    speech =  "Lookup Top Hackernews"
+    contexts = req.get("result").get("contexts")
+    parameters = req.get("result").get("parameters")
+    suggestions = []
+
+    # topNumber = parameters.get("top_number", 5)
+    # listItems = []
+    # speech = lookupItems(topNumber, contexts, listItems)
+    # # suggestions += ["Suggestion 1", "Suggestion 2","Suggestion 3"]
+
+    # print("----------- Final response -------------")
+    # print(filterAsciiText(speech))
+    data = addSuggestions(speech, suggestions, True, listItems)
+    # print(data)
+    return {
+    "speech": speech,
+    "displayText": speech,
+    "data": data,
+    "contextOut": contexts,
+    "source": "webhook"
+    }
+
 def googleLookupIntent(req):
     print("Reached intent")
     speech =  "Lookup Top Hackernews"

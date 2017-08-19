@@ -45,9 +45,10 @@ def webhook():
 def processRequest(req):
 	if req.get("result").get("action") == "TopNumber":
 		print("Top number detected")
-		a = HackerNews.googleLookupIntent(req)
-		print( " ---------------------------")
-		return a
+		return HackerNews.googleLookupIntent(req)
+	if req.get("result").get("action") == "NewsArticle":
+		print("News Article detected")
+		return HackerNews.googleLookupNewsIntent(req)
 	if req.get("result").get("action") == "EndIntent":
 		return endIntent()
 	
