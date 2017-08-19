@@ -61,6 +61,48 @@ def addSuggestions(speech = "", suggestions = [], userResponse = True, items = [
   }
 }
 
+def addSuggestionsCard(speech = "", suggestions = [], userResponse = True, title = "", url = "", author = "author"):
+    suggestionsTitles = []
+    for item in suggestions:
+        suggestionsTitles.append({"title":item})
+          
+    return {
+  'google': {
+    'expectUserResponse': True,
+    'isSsml': False,
+    'noInputPrompts': [],
+    'richResponse': {
+      'items': [
+        {
+          'simpleResponse': {
+            'textToSpeech': speech,
+            'displayText': speech
+          }
+        },
+        {
+            "basicCard": {
+                "title": title,
+                "formattedText": "**" + title + "**\n" + "By: " + author,
+                "image": {
+                    "url": "https://www.google.com/search?q=42",
+                    "accessibilityText": "Image alternate text"
+                },
+                "buttons": [
+                    {
+                        "title":title,
+                        "openUrlAction":{
+                          "url":url
+                        }
+                    }
+                ]
+            }
+        }
+      ],
+      'suggestions': suggestionsTitles
+    }
+  }
+}
+
 def lookupItem(item):
     headers = {"X-Mashape-Key":"QnME8qXj33mshqT4yltM7QQk1Kfjp1vX7zJjsnoN87jXS0bYCf","Accept":"application/json"}
     r = requests.get("https://community-hacker-news-v1.p.mashape.com/item/{}.json".format(item), headers=headers)
@@ -136,7 +178,7 @@ def googleLookupNewsIntent(req):
 
     print("----------- Final response -------------")
     print(filterAsciiText(speech))
-    data = addSuggestions(speech, suggestions, True)
+    data = addSuggestionsCard(speech, suggestions, True, newsData.get("title", "title"),newsData.get("url", "URL Not found"),newsData.get("by", "Author"))
     # print(data)
     return {
     "speech": speech,
