@@ -23,14 +23,14 @@ def addSuggestions(speech = "", suggestions = [], userResponse = True, items = [
     for item in suggestions:
         suggestionsTitles.append({"title":item})
     itemList = []
-    # for item in items:
-    #     a = {}
-    #     a["title"] = item[0]
-    #     a["optionInfo"] = {
-    #             'key': item[1],
-    #             'synonyms': [item[0]]
-    #           }
-    #     itemList.append(a)
+    for item in items:
+        a = {}
+        a["title"] = item[0]
+        a["optionInfo"] = {
+                'key': item[1],
+                'synonyms': [item[0]]
+              }
+        itemList.append(a)
           
     return {
   'google': {
