@@ -84,8 +84,8 @@ def welcomeIntent():
 	   }
 	}
 	return {
-		"speech": "Thank you for using Hacker News.  Hope to see you back soon!",
-		"displayText": "Thank you for using Hacker News.  Hope to see you back soon!",
+		"speech": "I'm Top of Hacker News. Just say how many articles you want and I will list them to you. After getting a list of article, you can click on an article to read it. At any point you can say cancel to close the assistant.",
+		"displayText": "I'm Top of Hacker News. Just say how many articles you want and I will list them to you. After getting a list of article, you can click on an article to read it. At any point you can say cancel to close the assistant.",
 		"data": data,
 		"contextOut": {},
 		"source": "webhook"
