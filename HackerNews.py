@@ -183,7 +183,7 @@ def googleLookupNewsIntent(req):
     return {
     "speech": speech,
     "displayText": speech,
-    "data": None,
+    "data": data,
     "contextOut": contexts,
     "source": "webhook"
     }
