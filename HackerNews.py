@@ -201,6 +201,8 @@ def googleLookupIntent(req):
         topNumber = 5
     if int(topNumber) > 20:
         topNumber = 20
+    if int(topNumber) <= 0:
+        topNumber = 3
 
     listItems = []
     speech = lookupItems(topNumber, contexts, listItems)
