@@ -197,12 +197,15 @@ def googleLookupIntent(req):
     suggestions = []
 
     topNumber = parameters.get("top_number", 5)
+    if topNumber == "":
+        topNumber = 5
     if int(topNumber) > 20:
         topNumber = 20
+
     listItems = []
     speech = lookupItems(topNumber, contexts, listItems)
     suggestions += ["Top 3", "Top 5","Top 10", "Top 15", "Top 20"]
-    speech += " To read an option, click on it. To look up more options by saying 'Top 5'. To end, say cancel."
+    speech += " To read an option, click on it. To look up more options, say 'Top 5' or however many more you want. To end, say cancel."
     print("----------- Final response -------------")
     print(filterAsciiText(speech))
     data = addSuggestions(speech, suggestions, True, listItems)
@@ -224,9 +227,11 @@ def lookupItems(number, contexts = [], listItems = []):
     contextArr = []
     for count in range(int(number)):
         item = lookupItem(result[count])
-        # print(item)
+        print("ITEM---------")
+        print(item)
+        print("End----ITEM---------")
         resultArr.append(item)
-        contextArr.append({'title': filterAsciiText(item['title']), 'id':item['id'], 'url':item['url']})
+        contextArr.append({'title': filterAsciiText(item.get("title", "Item Title")), 'id':item['id'], 'url':item.get("url","https://www.apple.com/")})
         # print(filterAsciiText("Found Item {} / {}, - {}".format(count + 1, number, item)))
     print(contextArr)
     updateContext(contexts, "itemscontext", 5, {'values':contextArr})
@@ -242,25 +247,23 @@ def lookupItems(number, contexts = [], listItems = []):
 # lookupItems(3)
 # --------------- Events ------------------
 
-
 test = {
-  "id": "dcaa7b6e-2fe8-47ed-baa5-5fad6cedc2af",
-  "timestamp": "2017-08-19T06:06:24.822Z",
+  "id": "fbfd55da-ea45-401c-8a8f-cbc93e898ebf",
+  "timestamp": "2017-08-23T00:27:41.421Z",
   "lang": "en",
   "result": {
     "source": "agent",
-    "resolvedQuery": "top 3",
+    "resolvedQuery": "1000",
     "action": "TopNumber",
     "actionIncomplete": False,
     "parameters": {
-      "top_number": "3"
+      "top_number": "1000"
     },
     "contexts": [],
     "metadata": {
       "intentId": "9ebff9ef-5b6d-4e1c-924d-5697481fa443",
       "webhookUsed": "true",
       "webhookForSlotFillingUsed": "false",
-      "webhookResponseTime": 1148,
       "intentName": "Top Intent"
     },
     "fulfillment": {
@@ -272,14 +275,14 @@ test = {
         }
       ]
     },
-    "score": 1
+    "score": 0.8100000023841858
   },
   "status": {
     "code": 206,
     "errorType": "partial_content",
-    "errorDetails": "Webhook call failed. Error: Webhook response was empty."
+    "errorDetails": "Webhook call failed. Error: 500 INTERNAL SERVER ERROR"
   },
-  "sessionId": "c849e9e7-3c08-45c4-9df6-4a438214aeb9"
+  "sessionId": "97dcb6e7-e962-4850-9da2-196199bea549"
 }
-# googleLookupIntent(test)
+googleLookupIntent(test)
 
