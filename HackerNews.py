@@ -141,6 +141,8 @@ def googleLookupNewsIntent(req):
     print(req)
     speech =  "Lookup Top Hackernews"
     contexts = req.get("result").get("contexts")
+    if contexts is None:
+        contexts = []
     parameters = req.get("result").get("parameters")
     suggestions = []
     for context in contexts:
@@ -187,22 +189,26 @@ def googleLookupNewsIntent(req):
     "source": "webhook"
     }
 
-print(lookupItem("15049171"))
-
 def googleLookupIntent(req):
     print("Reached intent")
-    speech =  "Lookup Top Hackernews"
-    contexts = req.get("result").get("contexts")
-    parameters = req.get("result").get("parameters")
+    speech =  "Lookup Top Hacker News"
+    contexts = req.get("contexts")
+    if contexts is None:
+        contexts = []
+    parameters = req.get("parameters")
     suggestions = []
 
-    topNumber = parameters.get("top_number", 5)
-    if topNumber == "":
+
+    if parameters is not None:
+        topNumber = parameters.get("top_number", 5)
+        if topNumber == "":
+            topNumber = 5
+        if int(topNumber) > 20:
+            topNumber = 20
+        if int(topNumber) <= 0:
+            topNumber = 3
+    else:
         topNumber = 5
-    if int(topNumber) > 20:
-        topNumber = 20
-    if int(topNumber) <= 0:
-        topNumber = 3
 
     listItems = []
     speech = lookupItems(topNumber, contexts, listItems)
@@ -236,6 +242,7 @@ def lookupItems(number, contexts = [], listItems = []):
         contextArr.append({'title': filterAsciiText(item.get("title", "Item Title")), 'id':item['id'], 'url':item.get("url","https://www.apple.com/")})
         # print(filterAsciiText("Found Item {} / {}, - {}".format(count + 1, number, item)))
     print(contextArr)
+    print(contexts)
     updateContext(contexts, "itemscontext", 5, {'values':contextArr})
     for i in resultArr:
         listItems.append([filterAsciiText(i["title"]), i["id"]])
@@ -250,41 +257,34 @@ def lookupItems(number, contexts = [], listItems = []):
 # --------------- Events ------------------
 
 test = {
-  "id": "fbfd55da-ea45-401c-8a8f-cbc93e898ebf",
-  "timestamp": "2017-08-23T00:27:41.421Z",
-  "lang": "en",
-  "result": {
-    "source": "agent",
-    "resolvedQuery": "1000",
+  "responseId": "951305e5-4285-4c98-9dd4-eceb622296ff",
+  "queryResult": {
+    "queryText": "top 5",
     "action": "TopNumber",
-    "actionIncomplete": False,
     "parameters": {
-      "top_number": "1000"
+      "top_number": 5
     },
-    "contexts": [],
-    "metadata": {
-      "intentId": "9ebff9ef-5b6d-4e1c-924d-5697481fa443",
-      "webhookUsed": "true",
-      "webhookForSlotFillingUsed": "false",
-      "intentName": "Top Intent"
-    },
-    "fulfillment": {
-      "speech": "",
-      "messages": [
-        {
-          "type": 0,
-          "speech": ""
+    "allRequiredParamsPresent": True,
+    "fulfillmentMessages": [
+      {
+        "text": {
+          "text": [
+            ""
+          ]
         }
-      ]
+      }
+    ],
+    "intent": {
+      "name": "projects/hacker-news-224eb/agent/intents/f6b5d4a2-9f09-4843-9bb7-233e36e96586",
+      "displayName": "Top Intent"
     },
-    "score": 0.8100000023841858
+    "intentDetectionConfidence": 1,
+    "languageCode": "en"
   },
-  "status": {
-    "code": 206,
-    "errorType": "partial_content",
-    "errorDetails": "Webhook call failed. Error: 500 INTERNAL SERVER ERROR"
+  "originalDetectIntentRequest": {
+    "payload": {}
   },
-  "sessionId": "97dcb6e7-e962-4850-9da2-196199bea549"
+  "session": "projects/hacker-news-224eb/agent/sessions/52726685-ac01-c7a1-b620-2388aa144163"
 }
 googleLookupIntent(test)
 
